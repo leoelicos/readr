@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "book-search-engine-server",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
