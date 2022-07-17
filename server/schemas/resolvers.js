@@ -6,10 +6,8 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     getSingleUser: async (parent, args, context) => {
-      if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('thoughts');
-      }
-      throw new AuthenticationError('You need to be logged in!');
+      if (!context.user) throw new AuthenticationError('You need to be logged in!');
+      return User.findOne({ _id: context.user._id }).populate('savedBooks');
     }
   },
 
@@ -39,7 +37,7 @@ const resolvers = {
         { _id: context.user._id },
         { $addToSet: { savedBooks: bookData } },
         { new: true, runValidators: true }
-      );
+      ).populate('savedBooks');
     },
 
     deleteBook: async (parent, { bookId }, context) => {
@@ -50,7 +48,7 @@ const resolvers = {
         { _id: context.user._id },
         { $pull: { savedBooks: { bookId: bookId } } },
         { new: true }
-      );
+      ).populate('savedBooks');
     }
   }
 };
