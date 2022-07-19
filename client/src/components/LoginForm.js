@@ -1,4 +1,3 @@
-// see SignupForm.js for comments
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
@@ -14,11 +13,9 @@ const LoginForm = () => {
 
   const [showAlert, setShowAlert] = useState(false);
 
-  // update state based on form input changes
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({
-      // override userFormData with whichever field is changed
       ...userFormData,
       [name]: value
     });
@@ -27,7 +24,6 @@ const LoginForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
