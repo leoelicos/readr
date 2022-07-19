@@ -40,7 +40,7 @@ const resolvers = {
       ).populate('savedBooks');
     },
 
-    deleteBook: async (parent, { bookId }, context) => {
+    removeBook: async (parent, { bookId }, context) => {
       if (!context.user) throw new AuthenticationError('You need to be logged in!');
 
       return await User.findOneAndUpdate(
