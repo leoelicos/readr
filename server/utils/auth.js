@@ -1,3 +1,13 @@
+/* 
+
+Book Search Engine
+auth.js
+
+Define authMiddleware function that will be attached to Apollo server context. The function checks if the token is valid, and updates the context.user with a user's data
+Define signToken function that will create a token from a user's information, a secret, and an expiration
+
+*/
+
 const jwt = require('jsonwebtoken');
 const secret = 'mysecretsshhhhh';
 const expiration = '2h';
