@@ -1,11 +1,8 @@
 import React from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
-
 import { REMOVE_BOOK } from '../utils/mutations';
 import { GET_ME } from '../utils/queries';
-
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
@@ -19,11 +16,11 @@ const SavedBooks = () => {
 
   const handleDeleteBook = async (bookId) => {
     try {
-      removeBook({ variables: { bookId: bookId } });
-      removeBookId(bookId);
+      await removeBook({ variables: { bookId: bookId } });
     } catch (err) {
       console.error(err);
     }
+    removeBookId(bookId);
   };
 
   return (
@@ -33,6 +30,7 @@ const SavedBooks = () => {
           <h1>Viewing saved books!</h1>
         </Container>
       </Jumbotron>
+
       <Container>
         {loading ? (
           <h2>Loading saved books…</h2>
@@ -44,6 +42,7 @@ const SavedBooks = () => {
                   `Viewing ${userData.me.bookCount} saved ${userData.me.bookCount === 1 ? 'book' : 'books'}:`
                 : 'You have no saved books!'}
             </h2>
+
             <CardColumns>
               {userData.me.savedBooks.map((book) => {
                 return (
