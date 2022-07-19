@@ -6,7 +6,7 @@ export const ME = gql`
       _id
       username
       email
-      password
+      bookCount
       savedBooks {
         _id
         authors
