@@ -29,13 +29,13 @@ const resolvers = {
       return { token, user };
     },
 
-    saveBook: async (parent, bookData, context) => {
+    saveBook: async (parent, { input }, context) => {
       if (!context.user) throw new AuthenticationError('You need to be logged in!');
 
       return await User.findOneAndUpdate(
         // arguments
         { _id: context.user._id },
-        { $addToSet: { savedBooks: bookData } },
+        { $addToSet: { savedBooks: input } },
         { new: true, runValidators: true }
       ).populate('savedBooks');
     },
