@@ -1,3 +1,15 @@
+/* 
+
+Book Search Engine
+mutations.js
+
+ADD_USER returns token and user
+LOGIN returns token and user
+SAVE_BOOK returns user with updated book in book list
+REMOVE_BOOK returns user without book in book list
+
+*/
+
 import { gql } from '@apollo/client';
 
 export const ADD_USER = gql`
