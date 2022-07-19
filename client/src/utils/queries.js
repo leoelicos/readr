@@ -1,3 +1,12 @@
+/* 
+
+Book Search Engine
+queries.js
+
+GET_ME returns user object containing all of the user's saved books
+
+*/
+
 import { gql } from '@apollo/client';
 
 export const GET_ME = gql`

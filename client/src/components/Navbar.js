@@ -1,22 +1,34 @@
+/* 
+
+Book Search Engine
+Navbar.js
+Navbar is a React component that allows a user to click on a menu of either Google Books Search, Search for Books, See Your Books or Login/Sign Up
+
+*/
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
-
 import Auth from '../utils/auth';
 
 const AppNavbar = () => {
+  // show modal
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
+      {/* navbar */}
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
+          {/* logo */}
           <Navbar.Brand as={Link} to="/">
             Google Books Search
           </Navbar.Brand>
+          {/* button to open and close hamburger menu */}
           <Navbar.Toggle aria-controls="navbar" />
+          {/* menu items */}
           <Navbar.Collapse id="navbar">
             <Nav className="ml-auto">
               <Nav.Link as={Link} to="/">
@@ -36,6 +48,8 @@ const AppNavbar = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
+      {/* modal containing login and signup forms */}
       <Modal size="lg" show={showModal} onHide={() => setShowModal(false)} aria-labelledby="signup-modal">
         <Tab.Container defaultActiveKey="login">
           <Modal.Header closeButton>

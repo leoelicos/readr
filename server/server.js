@@ -2,7 +2,7 @@
 
 Book Search Engine
 server.js
-This script configures and instantiates and starts an Apollo Server with Graph QL. It applies Express as middleware
+This script configures and instantiates and starts an Apollo Server with Graph QL. It applies Apollo server as Express middleware
 
 */
 
@@ -10,7 +10,11 @@ This script configures and instantiates and starts an Apollo Server with Graph Q
 const { typeDefs, resolvers } = require('./schemas');
 const { ApolloServer } = require('apollo-server-express');
 const { authMiddleware } = require('./utils/auth');
-const server = new ApolloServer({ typeDefs, resolvers, context: authMiddleware });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: authMiddleware
+});
 
 /* configure Express middleware */
 const express = require('express');
@@ -23,7 +27,7 @@ const path = require('path');
 if (process.env.NODE_ENV === 'production') app.use(express.static(path.join(__dirname, '../client/build')));
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../client/build/index.html')));
 
-// configure function to start Apollo server with Express middleware
+/* configure function to start Apollo server */
 const PORT = process.env.PORT || 3001;
 const db = require('./config/connection');
 const startApolloServer = async (typeDefs, resolvers) => {
@@ -36,5 +40,5 @@ const startApolloServer = async (typeDefs, resolvers) => {
   });
 };
 
-// call above function to start Apollo server with Express middleware
+// call above function to start Apollo server
 startApolloServer(typeDefs, resolvers);
