@@ -4,13 +4,13 @@ import { useQuery, useMutation } from '@apollo/client';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 
 import { DELETE_BOOK } from '../utils/mutations';
-import { GET_SINGLE_USER } from '../utils/queries';
+import { ME } from '../utils/queries';
 
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
-  const { loading: userLoading, data: userData } = useQuery(GET_SINGLE_USER);
+  const { loading: userLoading, data: userData } = useQuery(ME);
 
   const [deleteBook] = useMutation(DELETE_BOOK);
 
