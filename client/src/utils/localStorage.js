@@ -1,3 +1,13 @@
+/* 
+
+Book Search Engine
+localStorage.js
+getSavedBookIds retrieves list of saved books from local storage
+saveBookIds updates local storage with new book list
+removeBookId updates local storage book list without the param id 
+
+*/
+
 export const getSavedBookIds = () => {
   const savedBookIds = localStorage.getItem('saved_books')
     ? //
