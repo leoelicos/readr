@@ -1,6 +1,16 @@
+/* 
+
+Book Search Engine
+User.js
+
+Configure schema to have username, email, password, an array of savedBooks, and a virtual bookCount
+Pre-save hook to encrypt password
+Instance method to check a password is valid
+
+*/
+
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-
 const bookSchema = require('./Book');
 
 const userSchema = new Schema(
