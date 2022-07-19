@@ -1,3 +1,12 @@
+/* 
+
+Book Search Engine
+Book.js
+
+Configure schema to have an array of authors, description, bookId, image, link, title
+
+*/
+
 const { Schema } = require('mongoose');
 
 const bookSchema = new Schema({
