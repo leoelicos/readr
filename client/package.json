@@ -1,8 +1,9 @@
 {
   "name": "book-search-engine-client",
   "version": "0.1.0",
+  "description": "Book Search Engine Client",
   "private": true,
-  "proxy": "http://localhost:3001",
+  "proxy": "http://localhost:3001/",
   "dependencies": {
     "@apollo/client": "^3.5.8",
     "@testing-library/jest-dom": "^5.11.4",
