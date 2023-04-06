@@ -1,4 +1,4 @@
-# Book Search Engine
+# Readr
 
 ![react](https://img.shields.io/badge/17.0.1-0?label=react.js&style=for-the-badge&labelColor=white&color=black) ![apollo client](https://img.shields.io/badge/3.5.8-0?label=@apollo/client&style=for-the-badge&labelColor=white&color=black) ![apollo server express](https://img.shields.io/badge/3.10.0-0?label=@apollo%20server%20express&style=for-the-badge&labelColor=white&color=black) ![graphql](https://img.shields.io/badge/15.4.0-0?label=graphql&style=for-the-badge&labelColor=white&color=black)
 
@@ -15,7 +15,7 @@ I made this app in order to learn how to implement Graph QL on the back end. In 
 ## Usage
 
 - The app is deployed at https://leoelicos-googlebooks.herokuapp.com/
-- The repo is at https://github.com/leoelicos/book-search-engine
+- The repo is at https://github.com/leoelicos/readr
 
 ## Development and Testing
 
@@ -28,9 +28,9 @@ I made this app in order to learn how to implement Graph QL on the back end. In 
 ### 1. Git clone and go inside
 
 ```sh
-git clone https://github.com/leoelicos/book-search-engine.git
+git clone https://github.com/leoelicos/readr.git
 
-cd book-search-engine
+cd readr
 ```
 
 ### 2. Install dependencies

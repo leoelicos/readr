@@ -1,42 +1,32 @@
-/* 
-
-Book Search Engine
-auth.js
-
-Define authMiddleware function that will be attached to Apollo server context. The function checks if the token is valid, and updates the context.user with a user's data
-Define signToken function that will create a token from a user's information, a secret, and an expiration
-
-*/
-
-const jwt = require('jsonwebtoken');
-const secret = 'mysecretsshhhhh';
-const expiration = '2h';
+const jwt = require('jsonwebtoken')
+const secret = 'mysecretsshhhhh'
+const expiration = '2h'
 
 module.exports = {
   authMiddleware: function ({ req }) {
-    let token = req.body.token || req.query.token || req.headers.authorization;
+    let token = req.body.token || req.query.token || req.headers.authorization
 
     if (req.headers.authorization) {
-      token = token.split(' ').pop().trim();
+      token = token.split(' ').pop().trim()
     }
 
     if (!token) {
-      return req;
+      return req
     }
 
     try {
-      const { data } = jwt.verify(token, secret, { maxAge: expiration });
+      const { data } = jwt.verify(token, secret, { maxAge: expiration })
 
-      req.user = data;
+      req.user = data
     } catch {
-      console.log('Invalid token');
+      console.log('Invalid token')
     }
 
-    return req;
+    return req
   },
   signToken: function ({ username, email, _id }) {
-    const payload = { username, email, _id };
+    const payload = { username, email, _id }
 
-    return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
+    return jwt.sign({ data: payload }, secret, { expiresIn: expiration })
   }
-};
+}

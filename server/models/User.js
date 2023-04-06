@@ -1,17 +1,6 @@
-/* 
-
-Book Search Engine
-User.js
-
-Configure schema to have username, email, password, an array of savedBooks, and a virtual bookCount
-Pre-save hook to encrypt password
-Instance method to check a password is valid
-
-*/
-
-const { Schema, model } = require('mongoose');
-const bcrypt = require('bcrypt');
-const bookSchema = require('./Book');
+const { Schema, model } = require('mongoose')
+const bcrypt = require('bcrypt')
+const bookSchema = require('./Book')
 
 const userSchema = new Schema(
   {
@@ -33,25 +22,25 @@ const userSchema = new Schema(
     savedBooks: [bookSchema]
   },
   { toJSON: { virtuals: true } }
-);
+)
 
 userSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
-    const saltRounds = 10;
-    this.password = await bcrypt.hash(this.password, saltRounds);
+    const saltRounds = 10
+    this.password = await bcrypt.hash(this.password, saltRounds)
   }
 
-  next();
-});
+  next()
+})
 
 userSchema.methods.isCorrectPassword = async function (password) {
-  return bcrypt.compare(password, this.password);
-};
+  return bcrypt.compare(password, this.password)
+}
 
 userSchema.virtual('bookCount').get(function () {
-  return this.savedBooks.length;
-});
+  return this.savedBooks.length
+})
 
-const User = model('User', userSchema);
+const User = model('User', userSchema)
 
-module.exports = User;
+module.exports = User

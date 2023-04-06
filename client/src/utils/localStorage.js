@@ -1,41 +1,31 @@
-/* 
-
-Book Search Engine
-localStorage.js
-getSavedBookIds retrieves list of saved books from local storage
-saveBookIds updates local storage with new book list
-removeBookId updates local storage book list without the param id 
-
-*/
-
 export const getSavedBookIds = () => {
-  const savedBookIds = localStorage.getItem('saved_books')
+  const savedBookIds = localStorage.getItem('readr')
     ? //
-      JSON.parse(localStorage.getItem('saved_books'))
-    : [];
+      JSON.parse(localStorage.getItem('readr'))
+    : []
 
-  return savedBookIds;
-};
+  return savedBookIds
+}
 
 export const saveBookIds = (bookIdArr) => {
   if (!bookIdArr.length) {
-    localStorage.removeItem('saved_books');
-    return;
+    localStorage.removeItem('readr')
+    return
   }
-  localStorage.setItem('saved_books', JSON.stringify(bookIdArr));
-};
+  localStorage.setItem('readr', JSON.stringify(bookIdArr))
+}
 
 export const removeBookId = (bookId) => {
-  const savedBookIds = localStorage.getItem('saved_books')
+  const savedBookIds = localStorage.getItem('readr')
     ? //
-      JSON.parse(localStorage.getItem('saved_books'))
+      JSON.parse(localStorage.getItem('readr'))
     : //
-      null;
+      null
 
-  if (!savedBookIds) return false;
+  if (!savedBookIds) return false
 
-  const updatedSavedBookIds = savedBookIds?.filter((savedBookId) => savedBookId !== bookId);
-  localStorage.setItem('saved_books', JSON.stringify(updatedSavedBookIds));
+  const updatedSavedBookIds = savedBookIds?.filter((savedBookId) => savedBookId !== bookId)
+  localStorage.setItem('readr', JSON.stringify(updatedSavedBookIds))
 
-  return true;
-};
+  return true
+}

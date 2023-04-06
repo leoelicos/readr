@@ -1,42 +1,43 @@
-/* 
-
-Book Search Engine
-Navbar.js
-Navbar is a React component that allows a user to click on a menu of either Google Books Search, Search for Books, See Your Books or Login/Sign Up
-
-*/
-
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
-import SignUpForm from './SignupForm';
-import LoginForm from './LoginForm';
-import Auth from '../utils/auth';
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap'
+import SignUpForm from './SignupForm'
+import LoginForm from './LoginForm'
+import Auth from '../utils/auth'
 
 const AppNavbar = () => {
   // show modal
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false)
 
   return (
     <>
       {/* navbar */}
-      <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar
+        bg='dark'
+        variant='dark'
+        expand='lg'>
         <Container fluid>
           {/* logo */}
-          <Navbar.Brand as={Link} to="/">
+          <Navbar.Brand
+            as={Link}
+            to='/'>
             Google Books Search
           </Navbar.Brand>
           {/* button to open and close hamburger menu */}
-          <Navbar.Toggle aria-controls="navbar" />
+          <Navbar.Toggle aria-controls='navbar' />
           {/* menu items */}
-          <Navbar.Collapse id="navbar">
-            <Nav className="ml-auto">
-              <Nav.Link as={Link} to="/">
+          <Navbar.Collapse id='navbar'>
+            <Nav className='ml-auto'>
+              <Nav.Link
+                as={Link}
+                to='/'>
                 Search For Books
               </Nav.Link>
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to="/saved">
+                  <Nav.Link
+                    as={Link}
+                    to='/saved'>
                     See Your Books
                   </Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
@@ -50,26 +51,30 @@ const AppNavbar = () => {
       </Navbar>
 
       {/* modal containing login and signup forms */}
-      <Modal size="lg" show={showModal} onHide={() => setShowModal(false)} aria-labelledby="signup-modal">
-        <Tab.Container defaultActiveKey="login">
+      <Modal
+        size='lg'
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        aria-labelledby='signup-modal'>
+        <Tab.Container defaultActiveKey='login'>
           <Modal.Header closeButton>
-            <Modal.Title id="signup-modal">
-              <Nav variant="pills">
+            <Modal.Title id='signup-modal'>
+              <Nav variant='pills'>
                 <Nav.Item>
-                  <Nav.Link eventKey="login">Login</Nav.Link>
+                  <Nav.Link eventKey='login'>Login</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="signup">Sign Up</Nav.Link>
+                  <Nav.Link eventKey='signup'>Sign Up</Nav.Link>
                 </Nav.Item>
               </Nav>
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Tab.Content>
-              <Tab.Pane eventKey="login">
+              <Tab.Pane eventKey='login'>
                 <LoginForm handleModalClose={() => setShowModal(false)} />
               </Tab.Pane>
-              <Tab.Pane eventKey="signup">
+              <Tab.Pane eventKey='signup'>
                 <SignUpForm handleModalClose={() => setShowModal(false)} />
               </Tab.Pane>
             </Tab.Content>
@@ -77,7 +82,7 @@ const AppNavbar = () => {
         </Tab.Container>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default AppNavbar;
+export default AppNavbar

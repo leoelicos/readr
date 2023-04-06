@@ -1,14 +1,4 @@
-/* 
-
-Book Search Engine
-typeDefs.js
-
-Define types, queries and mutations
-Define input called BookInput that paramaterizes the fields to simplify the I/O for saveBook
-
-*/
-
-const { gql } = require('apollo-server-express');
+const { gql } = require('apollo-server-express')
 
 const typeDefs = gql`
   type User {
@@ -54,6 +44,6 @@ const typeDefs = gql`
     saveBook(input: BookInput!): User
     removeBook(bookId: String!): User
   }
-`;
+`
 
-module.exports = typeDefs;
+module.exports = typeDefs

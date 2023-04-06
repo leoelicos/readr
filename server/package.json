@@ -1,7 +1,7 @@
 {
-  "name": "book-search-engine-server",
+  "name": "readr-server",
   "version": "1.0.0",
-  "description": "Server for Book Search Engine",
+  "description": "Server for Readr",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
