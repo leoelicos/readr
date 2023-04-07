@@ -14,7 +14,7 @@ I made this app in order to learn how to implement Graph QL on the back end. In 
 
 ## Usage
 
-- The app is deployed at https://leoelicos-googlebooks.herokuapp.com/
+- The app is deployed at https://reader.herokuapp.com/
 - The repo is at https://github.com/leoelicos/readr
 
 ## Development and Testing

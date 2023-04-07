@@ -21,7 +21,7 @@ const AppNavbar = () => {
           <Navbar.Brand
             as={Link}
             to='/'>
-            Google Books Search
+            Readr
           </Navbar.Brand>
           {/* button to open and close hamburger menu */}
           <Navbar.Toggle aria-controls='navbar' />
