@@ -6,6 +6,10 @@ import SearchBooks from './pages/SearchBooks'
 import SavedBooks from './pages/SavedBooks'
 import Navbar from './components/Navbar'
 
+/* custom hooks */
+import useTitle from './hooks/useTitle.js'
+import useFavicon from './hooks/useFavicon.js'
+
 /* configure Apollo client to use token from local storage in Apollo client's context */
 const httpLink = createHttpLink({ uri: 'https://readr-iktp.onrender.com/graphql' })
 const authLink = setContext((_, { headers }) => {
@@ -14,7 +18,10 @@ const authLink = setContext((_, { headers }) => {
 })
 const client = new ApolloClient({ link: authLink.concat(httpLink), cache: new InMemoryCache() })
 
-function App() {
+export default function App() {
+  useTitle('Readr')
+  useFavicon('./images/readr.png')
+
   return (
     // apollo client
     <ApolloProvider client={client}>
@@ -45,5 +52,3 @@ function App() {
     </ApolloProvider>
   )
 }
-
-export default App
