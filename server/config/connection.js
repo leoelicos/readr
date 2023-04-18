@@ -9,7 +9,7 @@ Configure mongoose to connect to mongoDB Atlas in production mode on Heroku, oth
 
 const mongoose = require('mongoose')
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/readr', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/readr', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
