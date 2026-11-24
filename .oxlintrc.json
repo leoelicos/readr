@@ -1,0 +1,47 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "react", "jsx-a11y", "import", "unicorn", "vitest"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2024": true
+  },
+  "ignorePatterns": ["**/dist/**", "**/node_modules/**", "**/coverage/**"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-key": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "jsx-a11y/alt-text": "error",
+    "jsx-a11y/anchor-has-content": "error",
+    "jsx-a11y/anchor-is-valid": "error",
+    "jsx-a11y/aria-props": "error",
+    "jsx-a11y/aria-role": "error",
+    "jsx-a11y/click-events-have-key-events": "error",
+    "jsx-a11y/heading-has-content": "error",
+    "jsx-a11y/label-has-associated-control": "error",
+    "jsx-a11y/no-autofocus": "error",
+    "jsx-a11y/no-noninteractive-tabindex": "error",
+    "jsx-a11y/no-static-element-interactions": "error",
+    "jsx-a11y/role-has-required-aria-props": "error",
+    "typescript/no-explicit-any": "error",
+    "typescript/consistent-type-imports": "error",
+    "no-console": [
+      "warn",
+      {
+        "allow": ["info", "warn", "error"]
+      }
+    ],
+    "eqeqeq": "error",
+    "no-underscore-dangle": ["warn", { "allow": ["_id", "__typename"] }],
+    // role="list" is deliberate: Safari drops list semantics when list-style is none.
+    "jsx-a11y/no-redundant-roles": "off",
+    // role=status/search kept over <output>/<search> for wider assistive-tech support.
+    "jsx-a11y/prefer-tag-over-role": "off",
+    "import/no-unassigned-import": "off"
+  }
+}

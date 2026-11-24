@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .ink { fill: #1c1917 }
+    .rule { stroke: #1c1917 }
+    @media (prefers-color-scheme: dark) { .ink { fill: #f5f0e6 } .rule { stroke: #f5f0e6 } }
+  </style>
+  <rect x="3" y="5" width="7" height="22" rx="1.5" fill="#c2410c" />
+  <rect class="ink" x="11.5" y="3" width="6" height="24" rx="1.5" />
+  <rect x="19" y="6.5" width="6" height="21" rx="1.5" transform="rotate(-14 22 17)" fill="#0f766e" />
+  <path class="rule" d="M2 28.5h28" stroke-width="2" stroke-linecap="round" />
+</svg>

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Readr · Find your next great read</title>
+    <meta
+      name="description"
+      content="Search millions of books with Google Books and keep a personal reading shelf that follows you across devices."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f7f2e8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f7f2e8" />
+    <meta property="og:title" content="Readr" />
+    <meta
+      property="og:description"
+      content="Find your next great read and keep it on your shelf."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/logo192.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="preconnect" href="https://www.googleapis.com" />
+    <link rel="preconnect" href="https://books.google.com" />
+    <!-- Applies the saved/OS theme before first paint to avoid a flash. External file keeps CSP strict. -->
+    <script src="/theme-init.js"></script>
+  </head>
+  <body>
+    <noscript>Readr needs JavaScript to search books. Please enable it and reload.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

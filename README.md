@@ -1,88 +1,95 @@
 # Readr
 
-![react](https://img.shields.io/badge/17.0.1-0?label=react.js&style=for-the-badge&labelColor=white&color=black) ![apollo client](https://img.shields.io/badge/3.5.8-0?label=@apollo/client&style=for-the-badge&labelColor=white&color=black) ![apollo server express](https://img.shields.io/badge/3.10.0-0?label=@apollo%20server%20express&style=for-the-badge&labelColor=white&color=black) ![graphql](https://img.shields.io/badge/15.4.0-0?label=graphql&style=for-the-badge&labelColor=white&color=black)
+Search Google Books and keep a personal reading shelf that follows you across devices.
 
-## Introduction
+![React 19](https://img.shields.io/badge/react-19-black?style=for-the-badge&labelColor=white) ![Vite 8](https://img.shields.io/badge/vite-8-black?style=for-the-badge&labelColor=white) ![TypeScript 7](https://img.shields.io/badge/typescript-7-black?style=for-the-badge&labelColor=white) ![Apollo Server 5](https://img.shields.io/badge/apollo%20server-5-black?style=for-the-badge&labelColor=white) ![Express 5](https://img.shields.io/badge/express-5-black?style=for-the-badge&labelColor=white) ![WCAG 2.2 AA](https://img.shields.io/badge/WCAG-2.2%20AA-black?style=for-the-badge&labelColor=white)
 
-This two-page web app displays a Google Book Search with React and Apollo client front-end and Apollo Server and Graph QL backend. The app allows users to login and save books to their reading list without refreshing the page.
+| Home (light) | Results (light) |
+| --- | --- |
+| ![Home page, light theme](docs/screenshots/home-light.png) | ![Search results, light theme](docs/screenshots/results-light.png) |
+| **Sign in (dark)** | **Mobile (dark)** |
+| ![Sign-in dialog, dark theme](docs/screenshots/sign-in-dark.png) | ![Search results on a phone, dark theme](docs/screenshots/mobile-dark.png) |
 
-On the front end, this Node application uses npm packages `@apollo/client`, `react` and `react-bootstrap`.
+## What it does
 
-On the back end, this application uses npm packages `apollo-server-express`, `graphql`, `jsonwebtoken` and `mongoose`.
+- **Search** millions of books via the Google Books API, with shareable `?q=` URLs, "show more" paging and ⌘K / Ctrl+K to jump to the search box.
+- **Save** books to your shelf with one tap (optimistic UI). Signed out? Readr asks you to sign in, then finishes the save for you.
+- **Your shelf**: filter, sort (recent, title, author), remove with **Undo**.
+- **Light and dark themes** that follow your OS until you choose, with no flash on load.
 
-I made this app in order to learn how to implement Graph QL on the back end. In future I will learn how to add reducers and Stripe to my full- stack application.
+## Accessibility (WCAG 2.2 AA)
 
-## Usage
+- Semantic landmarks, one `h1` per page, skip link, and focus moved to the page heading on navigation.
+- Everything works by keyboard: native `<dialog>` for sign-in (focus trap, Esc, focus return), ARIA tabs with arrow keys, visible 3px focus rings that are never hidden under the sticky header (2.4.11).
+- Forms: real labels, `autocomplete` for password managers (3.3.8), inline errors linked with `aria-describedby`, focus sent to the first problem, values kept after an error (3.3.7), show-password toggle.
+- Live regions announce search progress, result counts and toasts. Toasts with actions (Undo) never time out (2.2.1).
+- Colour contrast is tested for both themes: body text ≥ 15:1, muted text ≥ 7:1, accents ≥ 4.5:1, focus ≥ 3:1.
+- Targets ≥ 24px (most are 44px) (2.5.8), reflows to 320px without horizontal scroll (1.4.10), `prefers-reduced-motion` turns animations off, Windows High Contrast supported.
+- Automated: axe-core in unit tests and in Playwright (desktop + mobile, light + dark) against the production build.
 
-- The app is deployed at https://reader.herokuapp.com/
-- The repo is at https://github.com/leoelicos/readr
+## Stack
 
-## Development and Testing
+| Part      | Tech                                                                                                 |
+| --------- | ---------------------------------------------------------------------------------------------------- |
+| Client    | React 19 (Actions, `useActionState`, `use`), React Router 8 (data router, view transitions), Apollo Client 4, Vite 8, TypeScript 7 |
+| Styling   | Hand-written modern CSS: `light-dark()`, container queries, scroll-driven animations, `@starting-style`, view transitions. Fraunces + Inter variable fonts, self-hosted |
+| Server    | Node 24 running TypeScript natively (type stripping, no build), Express 5, Apollo Server 5, Mongoose 9, `jose` JWTs, `bcryptjs`, zod-validated env, helmet + CORS + rate limiting |
+| Tooling   | npm workspaces, oxlint (incl. jsx-a11y), Prettier, Vitest 5, Testing Library, Playwright + axe, GitHub Actions |
 
-### 0. Download Node
+```
+client/   Vite + React app (src/pages, src/components, src/lib)
+server/   GraphQL API (src/graphql, src/models)
+```
 
-| Programs | Download links                  |
-| -------- | ------------------------------- |
-| `Node`   | https://nodejs.org/en/download/ |
+## Run locally
 
-### 1. Git clone and go inside
+Requires Node 24+ and a MongoDB (local `mongod`, Docker, or an Atlas connection string).
 
 ```sh
 git clone https://github.com/leoelicos/readr.git
-
 cd readr
-```
-
-### 2. Install dependencies
-
-```sh
 npm install
+cp .env.example server/.env   # then edit MONGODB_URI / JWT_SECRET
+npm run dev                   # API on :3001, client on http://localhost:5173
 ```
 
-### 3. Run in browser
+## Scripts
 
-```sh
-npm run develop
-```
+| Command              | What it does                                                  |
+| -------------------- | ------------------------------------------------------------- |
+| `npm run dev`        | API (watch mode) + Vite dev server                            |
+| `npm run build`      | Type-check and build the client to `client/dist`              |
+| `npm start`          | Start the API (serves `client/dist` too when `NODE_ENV=production`) |
+| `npm run lint`       | oxlint                                                        |
+| `npm run typecheck`  | `tsc` for client and server                                   |
+| `npm test`           | Vitest: client (jsdom + axe) and server (in-memory MongoDB)   |
+| `npm run test:a11y`  | Build, then Playwright + axe across themes and viewports      |
+| `npm run check`      | Everything CI runs                                            |
 
-## Video Demo
+## Configuration
 
-https://user-images.githubusercontent.com/99461390/179760452-28799488-6f25-4413-b0e8-871274f0ebfd.mp4
+Server (`server/.env` locally, dashboard env vars in production). See [`.env.example`](./.env.example).
 
-Video is also available on [YouTube](https://www.youtube.com/watch?v=CYu8L-D1U0s)
+| Variable       | Required          | Notes                                                    |
+| -------------- | ----------------- | -------------------------------------------------------- |
+| `MONGODB_URI`  | production        | MongoDB Atlas connection string                          |
+| `JWT_SECRET`   | **production**    | ≥ 32 random characters. The API refuses to start without it |
+| `JWT_TTL`      | no (`2h`)         | Login lifetime                                           |
+| `CORS_ORIGINS` | when split-hosted | Comma-separated client origins, e.g. your Vercel URL     |
+| `PORT`         | no (`3001`)       |                                                          |
 
-## Screenshots
+Client (build-time, public):
 
-### Home Page:
+| Variable                     | Notes                                                                      |
+| ---------------------------- | -------------------------------------------------------------------------- |
+| `VITE_GRAPHQL_URL`           | API endpoint. Set in `client/.env.production` to the Render API            |
+| `VITE_GOOGLE_BOOKS_API_KEY`  | Optional, referrer-restricted key to avoid anonymous Google rate limits    |
 
-![bse_homePage](https://user-images.githubusercontent.com/99461390/179761455-bdbd96ed-3a61-4acb-8cca-bc18c32f7950.jpg)
+## Deploy
 
-### Search Results:
-
-![bse_searchResults](https://user-images.githubusercontent.com/99461390/179761467-660eb391-46ed-44ef-8628-d7322d93c82d.jpg)
-
-### Login Modal:
-
-![bse_loginModal](https://user-images.githubusercontent.com/99461390/179761476-5f5c5388-fecd-4b78-875e-3f525a36f0d1.jpg)
-
-### Save Books:
-
-![bse_saveBooks](https://user-images.githubusercontent.com/99461390/179761504-cc1ee9ab-df4e-4ea3-8eab-cde689d32094.jpg)
-
-### Context Menu:
-
-![bse_contextMenu](https://user-images.githubusercontent.com/99461390/179761516-c5206e84-421f-4fef-ac64-8cf115f8423c.jpg)
-
-### Delete Option:
-
-![bse_deleteOption](https://user-images.githubusercontent.com/99461390/179761530-6094b69b-60ce-4a2b-9254-df8c24e9668c.jpg)
-
-## Credits
-
-- BCS Resources
+- **Client (Vercel)**: root directory `client`. `client/vercel.json` sets the Vite preset, `dist` output, SPA rewrites and cache headers.
+- **API (Render)**: build `npm install`, start `npm start`, Node version from `.node-version`. Set the env vars above.
 
 ## License
 
-&copy; Leo Wong <leoelicos@gmail.com>
-
-Licensed under the [MIT License](./LICENSE).
+© Leo Wong <leoelicos@gmail.com>. MIT.
