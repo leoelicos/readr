@@ -1,19 +1,35 @@
 {
   "name": "readr",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server/server.js",
-  "scripts": {
-    "start": "node server/server.js",
-    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
-    "install": "cd server && npm i && cd ../client && npm i",
-    "seed": "cd server && npm run seed",
-    "build": "cd client && npm run build"
+  "version": "2.0.0",
+  "private": true,
+  "description": "Readr: search Google Books and keep a personal reading shelf. React 19 + Vite client, Express 5 + Apollo Server 5 + MongoDB API.",
+  "license": "MIT",
+  "author": "Leo Wong <leoelicos@gmail.com>",
+  "type": "module",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "engines": {
+    "node": ">=24"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "scripts": {
+    "dev": "npm run dev --workspace server & npm run dev --workspace client & wait",
+    "start": "npm run start --workspace server",
+    "build": "npm run build --workspace client",
+    "typecheck": "npm run typecheck --workspaces",
+    "lint": "oxlint --deny-warnings",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "npm run test --workspaces",
+    "test:a11y": "npm run test:a11y --workspace client",
+    "check": "npm run lint && npm run format:check && npm run typecheck && npm test && npm run build"
+  },
   "devDependencies": {
-    "concurrently": "^5.1.0"
+    "oxlint": "^1.95.0",
+    "prettier": "^3.10.1"
+  },
+  "overrides": {
+    "@graphql-tools/utils": "^13.2.2"
   }
 }
